@@ -1,6 +1,6 @@
 MY_APXS=/usr/sbin/apxs
-MY_LDFLAGS=-lmemcached -L/usr/local/lib
-MY_CFLAGS=-I/usr/local/include/libmemcached
+MY_LDFLAGS=-lmemcached -L/usr/lib64
+MY_CFLAGS=-I/usr/include/libmemcached
 
 .SUFFIXES: .c .o .la
 .c.la:
