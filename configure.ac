@@ -1,7 +1,7 @@
 AC_INIT([mod_auth_memcookie], [1.0.0], [tobias.lawrence@gmail.com])
 AC_DEFINE([PACKAGE_URL],["https://github.com/tobz/mod_auth_openid"],[project url])
 AM_CONFIG_HEADER(src/config.h)
-AM_INIT_AUTOMAKE()
+AM_INIT_AUTOMAKE([mod_auth_memcookie],[1.0.0])
 
 AC_CONFIG_MACRO_DIR([acinclude.d])
 
@@ -40,6 +40,15 @@ AC_SUBST(APR_LDFLAGS)
 
 APACHE_CFLAGS="-I`${APXS} -q INCLUDEDIR` -I`${apr_config} --includedir`"
 AC_SUBST(APACHE_CFLAGS)
+
+# make sure we haz pthread because libmemcached might need it.
+AC_CHECK_LIB([pthread], [pthread_once])
+
+# now check for libmemcached, and alter the LDFLAGS to include -lpthread when it does the test.
+saved_LIBS="$LIBS"
+LIBS="$saved_LIBS -lpthread"
+AC_CHECK_LIB([memcached], [memcached_create])
+LIBS="$saved_LIBS"
 
 AC_CONFIG_FILES([
  Makefile
