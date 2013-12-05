@@ -20,3 +20,22 @@
 *.exe
 *.out
 *.app
+
+# Build artifacts
+config.*
+install-sh
+depcomp
+missing
+configure.in
+configure.scan
+configure
+Makefile.in
+Makefile
+aclocal*
+acinclude.d/lt*.m4
+acinclude.d/libtool.m4
+autom4te.cache
+src/.deps
+libtool
+ltmain.sh
+src/stamp-h1
