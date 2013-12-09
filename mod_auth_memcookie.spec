@@ -39,7 +39,7 @@ use it to provide single sign-on for your sites using Google Apps for authentica
 
 %{__install} -d -m0755 %{buildroot}%{_sysconfdir}/httpd/conf.d
 %{__cat} > %{buildroot}%{_sysconfdir}/httpd/conf.d/mod_auth_memcookie.conf << 'EOF'
-
+LoadModule auth_memcookie_module    modules/mod_auth_memcookie.so
 EOF
 %{__install} -m 755 src/.libs/mod_auth_memcookie.so %{buildroot}%{_libdir}/httpd/modules
 
