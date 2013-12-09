@@ -36,7 +36,7 @@
 #define unless(c) if(!(c))
 
 /* Declare our Apache module. */
-module AP_MODULE_DECLARE_DATA mod_auth_memcookie_module;
+module AP_MODULE_DECLARE_DATA auth_memcookie_module;
 
 /* Holds our configuration data. */
 typedef struct {
@@ -147,7 +147,7 @@ static apr_table_t *Auth_MemCookie_GetSession(request_rec *r, char *cookieValue)
     int entryCount = 0;
 
      /* Get our configuration. */
-    conf = ap_get_module_config(r->per_dir_config, &mod_auth_memcookie_module);
+    conf = ap_get_module_config(r->per_dir_config, &auth_memcookie_module);
 
     /* Initialize our memcache object. */
     mc_session = memcached_create(NULL);
@@ -310,7 +310,7 @@ static int Auth_MemCookie_DoSetHeader(void *rec, const char *key, const char *va
     char *headerName = apr_pstrcat(r->pool, "X-MAMC_", key, NULL);
 
     /* Get our configuration. */
-    conf = ap_get_module_config(r->per_dir_config, &mod_auth_memcookie_module);
+    conf = ap_get_module_config(r->per_dir_config, &auth_memcookie_module);
 
     if(conf->SetSessionHTTPHeaderEncode)
     {
@@ -347,7 +347,7 @@ static int Auth_MemCookie_CheckCookie(request_rec *r)
     ap_log_rerror(APLOG_MARK, APLOG_DEBUG|APLOG_NOERRNO, 0, r, ERRTAG "Entering Auth_MemCookie_CheckCookie");
 
     /* Get our configuration. */
-    conf = ap_get_module_config(r->per_dir_config, &mod_auth_memcookie_module);
+    conf = ap_get_module_config(r->per_dir_config, &auth_memcookie_module);
 
     ap_log_rerror(APLOG_MARK, APLOG_DEBUG|APLOG_NOERRNO, 0, r, ERRTAG "IP matching mode: %d", conf->MatchIPMode);
 
@@ -464,7 +464,7 @@ static int Auth_MemCookie_CheckAuth(request_rec *r)
     ap_log_rerror(APLOG_MARK, APLOG_DEBUG|APLOG_NOERRNO, 0, r, ERRTAG "Entering Auth_MemCookie_CheckAuth");
 
     /* Get our configuration. */
-    conf = ap_get_module_config(r->per_dir_config, &mod_auth_memcookie_module);
+    conf = ap_get_module_config(r->per_dir_config, &auth_memcookie_module);
 
     /* Check if we're authoritative. */
     unless(conf->Authoritative) return DECLINED;
@@ -619,7 +619,7 @@ static const command_rec Auth_MemCookie_commandTable[] =
 };
 
 /* Define the structure of the module. */
-module AP_MODULE_DECLARE_DATA mod_auth_memcookie_module =
+module AP_MODULE_DECLARE_DATA auth_memcookie_module =
 {
     STANDARD20_MODULE_STUFF,
     Auth_MemCookie_CreateDefaultConfig, /* Creates a default config for the module. */
