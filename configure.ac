@@ -19,8 +19,8 @@ AX_WITH_APXS()
 
 # Make sure we can find the apr-config binary.  We need this for the proper build flags.  Failed out
 # if we can't find it.
-AC_ARG_WITH(apr_config, AC_HELP_STRING([[--with-apr-config=FILE]], [Path to apr-config program]),
-    [ apr_config="$withval" ],
+AC_ARG_WITH(apr_config, AC_HELP_STRING([--with-apr-config=FILE], [Path to apr-config program]),
+    [apr_config="$withval"],
     [AC_PATH_PROGS(apr_config, [apr-config apr-0-config apr-1-config], [no], [$PATH:/usr/sbin/:/usr/local/apache2/bin])]
 )
 
@@ -55,7 +55,7 @@ LIBS="$saved_LIBS -lpthread"
 AC_CHECK_LIB([memcached], [memcached_create])
 LIBS="$saved_LIBS"
 
-AC_CONFIG_FILES(
+AC_CONFIG_FILES([
  Makefile
  src/Makefile
 ])
