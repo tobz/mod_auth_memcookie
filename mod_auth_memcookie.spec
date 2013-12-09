@@ -8,7 +8,7 @@ Summary:        Apache module for cookie-based authentication using memcache
 
 License:        Apache
 URL:            http://github.com/tobz/mod_auth_memcookie/
-Source:         mod_auth_memcookie-${version}.tar.gz
+Source:         mod_auth_memcookie-%{version}.tar.gz
 
 BuildRequires:  httpd-devel
 BuildRequires:  libmemcached-devel >= 1.0
